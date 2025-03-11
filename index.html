@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doudou Rose Éternelle - Cadeau Unique</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#5D5CDE',
+                        rose: '#FF6B8B',
+                        secondary: '#F2C94C'
+                    },
+                    fontFamily: {
+                        'sans': ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 min-h-screen flex flex-col transition-colors duration-200 font-sans">
+    <!-- Notification Bar -->
+    <div class="bg-secondary text-black py-2">
+        <div class="container mx-auto px-4 text-center text-sm">
+            <p>🎁 Livraison gratuite pour toute commande | Garantie 100% satisfait ou remboursé</p>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow sticky top-0 z-10">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-rose">Doudou Éternel</a>
+            <div class="flex items-center gap-4">
+                <button id="darkModeToggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:block"></i>
+                </button>
+                <a href="#" id="cartButton" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 relative">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="absolute -top-1 -right-1 bg-rose text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-pink-50 to-purple-50 dark:from-gray-800 dark:to-gray-700 py-16">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Doudou avec <span class="text-rose">Rose Éternelle</span></h1>
+                    <p class="text-lg mb-6 text-gray-600 dark:text-gray-300">Un cadeau unique qui combine douceur et beauté éternelle pour vos proches.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#product" class="bg-rose text-white px-6 py-3 rounded-full font-medium hover:bg-opacity-90 transition-all">
+                            Découvrir
+                        </a>
+                        <a href="#video" class="bg-transparent border-2 border-rose text-rose px-6 py-3 rounded-full font-medium hover:bg-rose hover:bg-opacity-10 transition-all">
+                            Voir la vidéo
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="w-full max-w-md h-64 md:h-96 relative overflow-hidden rounded-lg shadow-xl bg-white dark:bg-gray-800 flex items-center justify-center">
+                        <i class="fas fa-teddy-bear text-8xl text-rose"></i>
+                        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-30"></div>
+                        <div class="absolute bottom-4 left-0 right-0 text-center">
+                            <span class="bg-white dark:bg-gray-800 text-rose px-4 py-2 rounded-full text-sm font-bold">
+                                Cadeau Idéal
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Section -->
+    <section id="product" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center">Notre Produit Unique</h2>
+            
+            <div class="flex flex-col lg:flex-row gap-8 items-start">
+                <!-- Product Gallery -->
+                <div class="lg:w-1/2">
+                    <div class="bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden mb-4">
+                        <div id="mainImage" class="w-full h-80 md:h-96 flex items-center justify-center relative">
+                            <!-- Placeholder for the main product video/image -->
+                            <div class="text-center">
+                                <i class="fas fa-gift text-8xl text-rose mb-4"></i>
+                                <p class="text-gray-600 dark:text-gray-400">Doudou avec Rose Éternelle</p>
+                            </div>
+                            
+                            <!-- Video Container (hidden by default, will be shown when clicking the video tab) -->
+                            <div id="videoContainer" class="absolute inset-0 hidden">
+                                <video id="productVideo" controls class="w-full h-full object-cover">
+                                    <source src="https://drive.google.com/file/d/1BgXrb_-QQyl_hWuVMdm8fvCWudl9x1EX/view" type="video/mp4">
+                                    Votre navigateur ne supporte pas la lecture de vidéos.
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Gallery Tabs -->
+                    <div class="flex gap-2">
+                        <button class="gallery-tab flex-1 py-2 bg-rose text-white rounded-lg" data-view="image">
+                            <i class="fas fa-image mr-2"></i> Photos
+                        </button>
+                        <button id="videoTab" class="gallery-tab flex-1 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg" data-view="video">
+                            <i class="fas fa-video mr-2"></i> Vidéo
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Product Info -->
+                <div class="lg:w-1/2">
+                    <h1 class="text-2xl md:text-3xl font-bold mb-2">Doudou avec Rose Éternelle</h1>
+                    <div class="flex items-center mb-4">
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <span class="text-gray-600 dark:text-gray-400 ml-2">4.8/5 (42 avis)</span>
+                    </div>
+                    
+                    <div class="flex items-baseline mb-6">
+                        <span class="text-3xl font-bold text-rose">49,99 €</span>
+                        <span class="text-gray-500 dark:text-gray-400 line-through ml-2">59,99 €</span>
+                        <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs px-2 py-1 rounded ml-2">-17%</span>
+                    </div>
+                    
+                    <div class="prose prose-lg dark:prose-invert mb-6">
+                        <p class="mb-4">Le cadeau parfait qui combine <strong>douceur et élégance</strong>. Notre doudou avec rose éternelle est fait à la main avec des matériaux de qualité supérieure.</p>
+                        
+                        <h3 class="text-lg font-semibold mb-2">Caractéristiques :</h3>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Doudou ultra-doux et hypoallergénique</li>
+                            <li>Rose éternelle stabilisée (dure plus de 3 ans)</li>
+                            <li>Emballage cadeau premium inclus</li>
+                            <li>Carte personnalisable offerte</li>
+                            <li>Plusieurs coloris disponibles</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Color Selection -->
+                    <div class="mb-6">
+                        <h3 class="font-semibold mb-2">Couleur de la rose :</h3>
+                        <div class="flex gap-2">
+                            <button class="color-option w-8 h-8 rounded-full bg-red-600 border-2 border-white dark:border-gray-800 shadow-md"></button>
+                            <button class="color-option w-8 h-8 rounded-full bg-pink-400 border-2 border-white dark:border-gray-800 shadow-md"></button>
+                            <button class="color-option w-8 h-8 rounded-full bg-blue-500 border-2 border-white dark:border-gray-800 shadow-md"></button>
+                            <button class="color-option w-8 h-8 rounded-full bg-purple-600 border-2 border-white dark:border-gray-800 shadow-md"></button>
+                            <button class="color-option w-8 h-8 rounded-full bg-yellow-400 border-2 border-white dark:border-gray-800 shadow-md"></button>
+                        </div>
+                    </div>
+                    
+                    <!-- Add to Cart -->
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <div class="flex items-center border border-gray-300 dark:border-gray-600 rounded-lg">
+                            <button id="decreaseQuantity" class="px-4 py-2 text-rose">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="number" id="quantity" class="w-12 text-center py-2 border-x border-gray-300 dark:border-gray-600 bg-transparent text-base" value="1" min="1">
+                            <button id="increaseQuantity" class="px-4 py-2 text-rose">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        
+                        <a href="https://shopify.com" target="_blank" class="flex-1 bg-rose text-white py-3 px-6 rounded-lg font-semibold hover:bg-opacity-90 transition-all text-center">
+                            <i class="fas fa-shopping-cart mr-2"></i> Acheter sur Shopify
+                        </a>
+                    </div>
+                    
+                    <!-- Shipping Info -->
+                    <div class="mt-6 flex items-center text-gray-600 dark:text-gray-400">
+                        <i class="fas fa-truck mr-2"></i>
+                        <span>Livraison sous 2-3 jours ouvrables</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section id="video" class="py-16 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 text-center">Découvrez Notre Doudou en Vidéo</h2>
+            
+            <div class="max-w-3xl mx-auto bg-white dark:bg-gray-700 rounded-lg shadow-lg overflow-hidden">
+                <div class="aspect-w-16 aspect-h-9 relative">
+                    <div class="w-full h-0 pb-[56.25%] relative">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <!-- Integration de la vidéo Google Drive avec un placeholder -->
+                            <div class="text-center p-8">
+                                <i class="fas fa-video text-5xl text-rose mb-4"></i>
+                                <h3 class="text-xl font-semibold mb-2">Vidéo Produit</h3>
+                                <p class="text-gray-600 dark:text-gray-400 mb-4">Voir notre doudou avec rose éternelle en action</p>
+                                <a href="https://drive.google.com/file/d/1BgXrb_-QQyl_hWuVMdm8fvCWudl9x1EX/view?usp=sharing" target="_blank" class="inline-block bg-rose text-white px-6 py-2 rounded-full hover:bg-opacity-90 transition-all">
+                                    <i class="fas fa-external-link-alt mr-2"></i> Voir la vidéo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center">Pourquoi Choisir Notre Doudou ?</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md text-center">
+                    <div class="w-16 h-16 bg-rose bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-heart text-2xl text-rose"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Fait avec Amour</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Chaque doudou est confectionné à la main avec le plus grand soin par nos artisans.</p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md text-center">
+                    <div class="w-16 h-16 bg-rose bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-infinity text-2xl text-rose"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Rose Éternelle</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Notre rose stabilisée conserve sa beauté pendant plus de 3 ans sans entretien particulier.</p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md text-center">
+                    <div class="w-16 h-16 bg-rose bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-gift text-2xl text-rose"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Cadeau Parfait</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Idéal pour les anniversaires, Saint-Valentin, fêtes des mères et toute occasion spéciale.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="py-16 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center">Ce que nos clients disent</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Review 1 -->
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md">
+                    <div class="flex text-yellow-400 mb-2">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">"J'ai offert ce doudou avec rose éternelle à ma fille pour son anniversaire. Elle est complètement sous le charme ! La qualité est exceptionnelle."</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-rose rounded-full flex items-center justify-center text-white font-bold mr-3">S</div>
+                        <div>
+                            <h4 class="font-semibold">Sophie L.</h4>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Achat vérifié</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Review 2 -->
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md">
+                    <div class="flex text-yellow-400 mb-2">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">"Un cadeau qui a fait sensation pour la Saint-Valentin ! La rose est toujours aussi belle après plusieurs mois. Le doudou est très doux."</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold mr-3">T</div>
+                        <div>
+                            <h4 class="font-semibold">Thomas M.</h4>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Achat vérifié</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Review 3 -->
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md">
+                    <div class="flex text-yellow-400 mb-2">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">"J'ai craqué pour le design unique. C'est un mélange parfait entre douceur et élégance. L'emballage était magnifique, parfait pour offrir directement."</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white font-bold mr-3">E</div>
+                        <div>
+                            <h4 class="font-semibold">Emma R.</h4>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Achat vérifié</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-center">
+                <a href="#" class="inline-block border-2 border-rose text-rose px-6 py-3 rounded-full hover:bg-rose hover:text-white transition-all">
+                    Voir tous les avis
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center">Questions Fréquentes</h2>
+            
+            <div class="max-w-3xl mx-auto space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="faq-item border dark:border-gray-700 rounded-lg overflow-hidden">
+                    <button class="faq-question w-full flex justify-between items-center p-4 text-left font-semibold focus:outline-none">
+                        <span>Combien de temps dure la rose éternelle ?</span>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </button>
+                    <div class="faq-answer p-4 pt-0 hidden">
+                        <p class="text-gray-600 dark:text-gray-400">Notre rose éternelle est stabilisée par un procédé spécial qui lui permet de conserver sa beauté pendant 3 à 5 ans, sans nécessiter d'eau ni d'entretien particulier. Évitez simplement de l'exposer directement au soleil ou à l'humidité excessive.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 2 -->
+                <div class="faq-item border dark:border-gray-700 rounded-lg overflow-hidden">
+                    <button class="faq-question w-full flex justify-between items-center p-4 text-left font-semibold focus:outline-none">
+                        <span>Le doudou est-il lavable ?</span>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </button>
+                    <div class="faq-answer p-4 pt-0 hidden">
+                        <p class="text-gray-600 dark:text-gray-400">Le doudou lui-même est lavable à la main avec de l'eau tiède. Cependant, la rose éternelle ne doit pas être lavée ou mouillée. Vous pouvez facilement détacher la rose avant de laver le doudou grâce à notre système de fixation spécial.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 3 -->
+                <div class="faq-item border dark:border-gray-700 rounded-lg overflow-hidden">
+                    <button class="faq-question w-full flex justify-between items-center p-4 text-left font-semibold focus:outline-none">
+                        <span>Proposez-vous un emballage cadeau ?</span>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </button>
+                    <div class="faq-answer p-4 pt-0 hidden">
+                        <p class="text-gray-600 dark:text-gray-400">Oui ! Chaque doudou avec rose éternelle est livré dans un magnifique coffret cadeau élégant. Nous incluons également une carte que vous pouvez personnaliser avec votre message lors de la commande.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 4 -->
+                <div class="faq-item border dark:border-gray-700 rounded-lg overflow-hidden">
+                    <button class="faq-question w-full flex justify-between items-center p-4 text-left font-semibold focus:outline-none">
+                        <span>Quelles sont les options de livraison ?</span>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </button>
+                    <div class="faq-answer p-4 pt-0 hidden">
+                        <p class="text-gray-600 dark:text-gray-400">Nous proposons la livraison standard gratuite (2-3 jours ouvrables) pour toutes les commandes. Une option de livraison express (24h) est également disponible moyennant un supplément de 9,99€.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-16 bg-rose bg-opacity-10 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-4">Restez informé</h2>
+                <p class="text-gray-600 dark:text-gray-400 mb-6">Inscrivez-vous à notre newsletter pour recevoir nos offres exclusives et nouveautés.</p>
+                
+                <form class="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
+                    <input type="email" placeholder="Votre adresse e-mail" class="flex-1 px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 text-base focus:outline-none focus:ring-2 focus:ring-rose">
+                    <button type="submit" class="bg-rose text-white px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all">
+                        S'inscrire
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 pt-10 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Doudou Éternel</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">Des cadeaux uniques qui combinent douceur et élégance pour créer des souvenirs inoubliables.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-gray-500 hover:text-rose transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-500 hover:text-rose transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-500 hover:text-rose transition-colors">
+                            <i class="fab fa-pinterest-p"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Liens Utiles</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-rose transition-colors">À propos de nous</a></li>
+                        <li><a href="#" id="cgvLink" class="text-gray-600 dark:text-gray-400 hover:text-rose transition-colors">Conditions générales de vente</a></li>
+                        <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-rose transition-colors">Politique de confidentialité</a></li>
+                        <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-rose transition-colors">Livraison et retours</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Contact</h3>
+                    <ul class="space-y-2 text-gray-600 dark:text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-2 text-rose"></i>
+                            <span>1234 Rue du Commerce, 75000 Paris, France</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-rose"></i>
+                            <span>+33 1 23 45 67 89</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-rose"></i>
+                            <span>contact@doudou-eternel.fr</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-200 dark:border-gray-700 pt-6 text-center text-gray-500 dark:text-gray-400 text-sm">
+                <p>&copy; 2023 Doudou Éternel. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Conditions Générales de Vente -->
+    <div id="cgvSection" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col">
+            <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center sticky top-0 bg-white dark:bg-gray-800 z-10">
+                <h2 class="text-xl font-bold">Conditions Générales de Vente</h2>
+                <button id="closeCgvButton" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-6 overflow-y-auto">
+                <div class="prose prose-sm max-w-none dark:prose-invert">
+                    <h3>Article 1 - Champ d'application</h3>
+                    <p>Les présentes Conditions Générales de Vente (ci-après "CGV") s'appliquent à toutes les ventes conclues par la société Doudou Éternel (ci-après "le Vendeur") auprès des acheteurs consommateurs (ci-après "le Client") souhaitant acquérir les produits proposés à la vente sur le site www.doudou-eternel.fr (ci-après "le Site").</p>
+                    
+                    <h3>Article 2 - Produits</h3>
+                    <p>Les produits proposés à la vente sont ceux figurant sur le Site au jour de sa consultation par le Client. Les photographies, textes et informations présentés sur le Site ne sont pas contractuels et peuvent être modifiés à tout moment. Le Vendeur s'efforce de présenter au mieux les caractéristiques essentielles des produits.</p>
+                    
+                    <h3>Article 3 - Prix</h3>
+                    <p>Les prix sont indiqués en euros, toutes taxes comprises (TTC), hors frais de livraison. Le Vendeur se réserve le droit de modifier ses prix à tout moment, mais les produits sont facturés sur la base des tarifs en vigueur au moment de la validation de la commande.</p>
+                    
+                    <h3>Article 4 - Commande</h3>
+                    <p>Pour passer commande, le Client suit les différentes étapes de commande décrites sur le Site. La validation finale de la commande par le Client vaut acceptation des présentes CGV et forme le contrat de vente. Un email de confirmation est envoyé au Client à l'adresse email fournie lors de la commande.</p>
+                    <p>Le Vendeur se réserve le droit de refuser ou d'annuler toute commande d'un Client avec lequel il existerait un litige antérieur.</p>
+                    
+                    <h3>Article 5 - Paiement</h3>
+                    <p>Le paiement s'effectue en ligne par carte bancaire, PayPal ou tout autre moyen proposé sur le Site. Le débit du compte du Client est effectué au moment de la validation de la commande. En cas de paiement par carte bancaire, les données sont chiffrées et transmises de façon sécurisée.</p>
+                    
+                    <h3>Article 6 - Livraison</h3>
+                    <p>Les délais de livraison indiqués sur le Site sont des délais moyens et correspondent aux délais de traitement et de livraison. Les produits sont livrés à l'adresse indiquée par le Client lors de la commande. Le Vendeur ne saurait être tenu responsable d'une erreur d'adresse communiquée par le Client.</p>
+                    <p>En cas de retard de livraison de plus de 7 jours par rapport à la date initialement prévue, le Client peut contacter le service client pour résoudre le problème ou annuler sa commande.</p>
+                    
+                    <h3>Article 7 - Droit de rétractation</h3>
+                    <p>Conformément aux dispositions légales en vigueur, le Client dispose d'un délai de quatorze (14) jours à compter de la réception du produit pour exercer son droit de rétractation sans avoir à justifier de motifs ni à payer de pénalités.</p>
+                    <p>Pour exercer ce droit, le Client doit notifier sa décision de rétractation au moyen d'une déclaration claire et sans ambiguïté par email à contact@doudou-eternel.fr ou par courrier postal à l'adresse du Vendeur.</p>
+                    <p>Le Client doit retourner le produit au Vendeur, sans retard excessif et au plus tard dans les quatorze jours suivant sa décision de rétractation. Les frais de retour sont à la charge du Client.</p>
+                    <p>Le produit doit être retourné dans son état d'origine, complet, non utilisé et dans son emballage d'origine. Tout produit endommagé ou présentant des traces d'utilisation ne sera pas remboursé.</p>
+                    <p>Le remboursement sera effectué dans un délai de 14 jours à compter de la réception du produit retourné, ou de la preuve de son expédition.</p>
+                    
+                    <h3>Article 8 - Garanties</h3>
+                    <p>Les produits vendus bénéficient de la garantie légale de conformité (articles L.217-4 et suivants du Code de la consommation) et de la garantie contre les vices cachés (articles 1641 et suivants du Code civil).</p>
+                    <p>Pour la rose éternelle, la garantie porte sur une durée de conservation de l'aspect esthétique de minimum 3 ans dans des conditions normales d'utilisation (hors exposition directe au soleil ou à une humidité excessive).</p>
+                    <p>Pour le doudou, la garantie porte sur une durée de 2 ans et couvre les défauts de fabrication.</p>
+                    
+                    <h3>Article 9 - Responsabilité</h3>
+                    <p>Le Vendeur ne peut être tenu responsable des dommages résultant d'une mauvaise utilisation du produit par le Client. Le Vendeur ne peut également être tenu responsable de l'inexécution du contrat en cas de force majeure, de perturbation ou de grève totale ou partielle des services postaux ou des moyens de transport.</p>
+                    
+                    <h3>Article 10 - Propriété intellectuelle</h3>
+                    <p>Tous les éléments du Site (textes, illustrations, photographies, etc.) sont la propriété exclusive du Vendeur. Toute reproduction, représentation, modification ou adaptation, totale ou partielle du Site est strictement interdite sans l'autorisation expresse du Vendeur.</p>
+                    
+                    <h3>Article 11 - Données personnelles</h3>
+                    <p>Les données personnelles collectées lors de la commande sont nécessaires au traitement de celle-ci et peuvent être transmises aux partenaires du Vendeur chargés de l'exécution, du traitement et de la gestion des commandes.</p>
+                    <p>Conformément à la loi Informatique et Libertés du 6 janvier 1978 et au Règlement Général sur la Protection des Données (RGPD), le Client dispose d'un droit d'accès, de rectification, d'opposition et de suppression des données le concernant en écrivant à l'adresse du Vendeur ou par email à contact@doudou-eternel.fr.</p>
+                    
+                    <h3>Article 12 - Droit applicable et litiges</h3>
+                    <p>Les présentes CGV sont soumises au droit français. En cas de litige, les tribunaux français seront compétents. Le Client est informé qu'il peut recourir à une médiation conventionnelle ou à tout autre mode alternatif de règlement des différends.</p>
+                    
+                    <h3>Article 13 - Service client</h3>
+                    <p>Pour toute information ou question, notre service client est à votre disposition :</p>
+                    <ul>
+                        <li>Par téléphone : +33 1 23 45 67 89 (du lundi au vendredi de 9h à 18h)</li>
+                        <li>Par email : contact@doudou-eternel.fr</li>
+                        <li>Par courrier : Doudou Éternel, 1234 Rue du Commerce, 75000 Paris, France</li>
+                    </ul>
+                    
+                    <p class="mt-6 text-gray-500">Dernière mise à jour des CGV : 1er juin 2023</p>
+                </div>
+            </div>
+            <div class="p-4 border-t border-gray-200 dark:border-gray-700 flex justify-end bg-white dark:bg-gray-800">
+                <button id="acceptCgvButton" class="bg-rose text-white px-6 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition-all">
+                    J'ai lu et j'accepte
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dark Mode Toggle
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+
+        document.getElementById('darkModeToggle').addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+        });
+
+        // Quantity Controls
+        const quantityInput = document.getElementById('quantity');
+        
+        document.getElementById('decreaseQuantity').addEventListener('click', () => {
+            const currentValue = parseInt(quantityInput.value, 10);
+            if (currentValue > 1) {
+                quantityInput.value = currentValue - 1;
+            }
+        });
+        
+        document.getElementById('increaseQuantity').addEventListener('click', () => {
+            quantityInput.value = parseInt(quantityInput.value, 10) + 1;
+        });
+
+        // Color Selection
+        const colorOptions = document.querySelectorAll('.color-option');
+        
+        colorOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                // Remove selected class from all options
+                colorOptions.forEach(opt => {
+                    opt.classList.remove('ring', 'ring-offset-2', 'ring-rose');
+                });
+                
+                // Add selected class to clicked option
+                option.classList.add('ring', 'ring-offset-2', 'ring-rose');
+            });
+        });
+
+        // Gallery Tabs
+        const galleryTabs = document.querySelectorAll('.gallery-tab');
+        const mainImage = document.getElementById('mainImage');
+        const videoContainer = document.getElementById('videoContainer');
+        
+        galleryTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const view = tab.dataset.view;
+                
+                // Update active tab
+                galleryTabs.forEach(t => {
+                    t.classList.remove('bg-rose', 'text-white');
+                    t.classList.add('bg-gray-200', 'dark:bg-gray-700', 'text-gray-700', 'dark:text-gray-300');
+                });
+                
+                tab.classList.remove('bg-gray-200', 'dark:bg-gray-700', 'text-gray-700', 'dark:text-gray-300');
+                tab.classList.add('bg-rose', 'text-white');
+                
+                // Show/hide video
+                if (view === 'video') {
+                    videoContainer.classList.remove('hidden');
+                } else {
+                    videoContainer.classList.add('hidden');
+                }
+            });
+        });
+
+        // FAQ Accordion
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const icon = question.querySelector('i');
+                
+                // Toggle answer visibility
+                answer.classList.toggle('hidden');
+                
+                // Toggle icon rotation
+                if (answer.classList.contains('hidden')) {
+                    icon.style.transform = 'rotate(0deg)';
+                } else {
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+
+        // Video Link Setup
+        document.getElementById('videoTab').addEventListener('click', () => {
+            const videoLink = document.querySelector('#videoContainer a');
+            if (videoLink) {
+                videoLink.setAttribute('target', '_blank');
+            }
+        });
+        
+        // CGV Modal Controls
+        const cgvSection = document.getElementById('cgvSection');
+        const cgvLink = document.getElementById('cgvLink');
+        const closeCgvButton = document.getElementById('closeCgvButton');
+        const acceptCgvButton = document.getElementById('acceptCgvButton');
+        
+        // Show CGV
+        cgvLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            cgvSection.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        });
+        
+        // Hide CGV
+        function hideCgv() {
+            cgvSection.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+        
+        closeCgvButton.addEventListener('click', hideCgv);
+        acceptCgvButton.addEventListener('click', hideCgv);
+        
+        // Close CGV when clicking outside the modal
+        cgvSection.addEventListener('click', (e) => {
+            if (e.target === cgvSection) {
+                hideCgv();
+            }
+        });
+
+        // Add to Cart Notification
+        document.querySelector('a[href="https://shopify.com"]').addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Show notification
+            showNotification('Redirection vers Shopify...');
+            
+            // Redirect after a short delay
+            setTimeout(() => {
+                window.open('https://shopify.com', '_blank');
+            }, 1000);
+        });
+
+        // Show Notification
+        function showNotification(message) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = 'fixed bottom-4 right-4 bg-rose text-white px-4 py-2 rounded-lg shadow-lg transform translate-y-full opacity-0 transition-all duration-300';
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Show notification
+            setTimeout(() => {
+                notification.classList.remove('translate-y-full', 'opacity-0');
+            }, 10);
+            
+            // Hide and remove notification
+            setTimeout(() => {
+                notification.classList.add('translate-y-full', 'opacity-0');
+                
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
